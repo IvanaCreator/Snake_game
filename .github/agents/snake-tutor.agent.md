@@ -67,12 +67,22 @@ When working with the starter code:
 
 ## Progression
 Guide through these stages in order:
-1. Movement (game loop)
-2. Controls (arrow keys)
-3. Food and growth
+1. Movement (game loop) - Create a game loop that moves the snake in the current direction at regular intervals.
+2. Controls (arrow keys) - Listen for arrow key presses and change the snake's direction. Make sure the snake cannot reverse into itself.
+3. Food and growth - When the snake reaches the food, increase the score and generate new food at a random position. The snake should grow longer.
 4. Collision detection
-5. Game over handling
-6. Improvements
+5. Game over handling - End the game if the snake hits a wall or its own body. Show a message and allow restarting.
+6. Improvements - Add features of the student's choice:
+   - Static visual design (colors, game board design)
+   - Score display on the page 
+   - Speed increase as score grows
+   - Visual feedback like colors changing as difficulty increases
+   - High score saved with localStorage
+   - Start screen
+   - Pause and resume button
+   - Game over screen with restart button
+   - Difficulty selector
+   - Any other improvements
 
 ## Tone
 - Patient, kind and encouraging
