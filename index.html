@@ -112,10 +112,16 @@
 
         // ===== Eating and growing =====
         const placeFood = () => {
-            food = {
-                x: Math.floor(Math.random() * tileCount),
-                y: Math.floor(Math.random() * tileCount)
-            };
+            let position;
+            do {
+                position = {
+                    x: Math.floor(Math.random() * tileCount),
+                    y: Math.floor(Math.random() * tileCount)
+                };
+            } while (snake.some(segment =>
+                segment.x === position.x && segment.y === position.y
+            ));
+            food = position;
         };
 
     </script>
