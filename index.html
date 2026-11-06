@@ -79,9 +79,11 @@
         // ===== MOVEMENT =====
         const moveSnake = () => {
             if (gameOver) {
+                let mess = document.getElementById("info");
+                mess.textContent = "Game over!"
                 return;
             }
-            
+
             const head = snake[0];
             const newHead = {
                 x: head.x + direction.x,
