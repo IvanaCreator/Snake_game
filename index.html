@@ -111,7 +111,12 @@
         });
 
         // ===== Eating and growing =====
-        
+        const placeFood = () => {
+            food = {
+                x: Math.floor(Math.random() * tileCount),
+                y: Math.floor(Math.random() * tileCount)
+            };
+        };
 
     </script>
 
