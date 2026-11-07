@@ -49,7 +49,7 @@
 
         const showScreen = (screen) => {
             startScreen.hidden = screen !== "start";
-            gameScreen.hidden = screen !== "game";
+            gameScreen.hidden = screen !== "playing";
             gameOverScreen.hidden = screen !== "gameOver";
         };
 
@@ -64,7 +64,6 @@
         let direction = { x: 1, y: 0 };
         let food = { x: 15, y: 15 };
         let score = 0;
-        let gameOver = false;
 
         // ===== Score =====
         const updateScore = () => {
@@ -118,12 +117,11 @@
         // ===== MOVEMENT =====
         const moveSnake = () => {
             if (gameState !== "playing") {
-                return;
-            }
-
-            if (gameOver) {
                 let mess = document.getElementById("info");
                 mess.textContent = "Game over!"
+
+                let finScore = document.getElementById("finalScore");
+                finScore.textContent = `Final score: ${score}`;
                 return;
             }
 
@@ -137,13 +135,12 @@
                 newHead.y < 0 || newHead.y >= tileCount ||
                 snake.some(segment => segment.x === newHead.x && segment.y === newHead.y)
             ) {
-                gameOver = true;
                 gameState = "gameOver";
                 showScreen("gameOver");
                 return;
             }
 
-            if (!gameOver) {
+            if (gameState === "playing") {
                 snake.unshift(newHead);
 
                 if (newHead.x === food.x && newHead.y === food.y) {
@@ -196,27 +193,22 @@
             ];
             direction = { x: 1, y: 0 };
             score = 0;
-            gameOver = false;
-
-            let mess = document.getElementById("info");
-            mess.textContent = "";
+            gameState = "playing";
+            showScreen(gameState);
 
             drawGame();
         }
 
-        let rsrt = document.getElementById("restartButton");
-        rsrt.addEventListener("click", restart);
-
         // ===== Start and restart button =====
         startButton.addEventListener("click", () => {
             gameState = "playing";
-            showScreen("game");
+            showScreen(gameState);
         });
 
         restartButton.addEventListener("click", () => {
             restart();
             gameState = "playing";
-            showScreen("game");
+            showScreen(gameState);
         });
 
     </script>
