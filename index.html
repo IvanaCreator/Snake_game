@@ -15,6 +15,7 @@
     <h1>Snake</h1>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
     <button id="restartButton">Restart</button>
+    <p id="score"></p>
     <p id="info"></p>
 
     <script>
@@ -35,6 +36,14 @@
         let food = { x: 15, y: 15 };
         let score = 0;
         let gameOver = false;
+
+        // ===== Score =====
+        const updateScore = () => {
+            scoreElement.textContent = `Score: ${score}`;
+        };
+
+        const scoreElement = document.getElementById("score");
+        updateScore();
 
         // ===== DRAWING =====
         const drawGame = () => {
@@ -103,6 +112,7 @@
 
                 if (newHead.x === food.x && newHead.y === food.y) {
                     score += 1;
+                    updateScore();
                     placeFood();
                 } else {
                     snake.pop();
