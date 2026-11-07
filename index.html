@@ -21,6 +21,7 @@
 
     <div id="gameScreen" hidden>
         <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <button id="pauseButton">Pause</button>
         <p id="score"></p>
     </div>
 
@@ -46,6 +47,7 @@
 
         const startButton = document.getElementById("startButton");
         const restartButton = document.getElementById("restartButton");
+        const pauseButton = document.getElementById("pauseButton");
 
         const showScreen = (screen) => {
             startScreen.hidden = screen !== "start";
@@ -64,6 +66,8 @@
         let direction = { x: 1, y: 0 };
         let food = { x: 15, y: 15 };
         let score = 0;
+
+        pauseButton.textContent = "Pause";
 
         // ===== Score =====
         const updateScore = () => {
@@ -193,6 +197,7 @@
             direction = { x: 1, y: 0 };
             score = 0;
             gameState = "playing";
+            pauseButton.textContent = "Pause";
             showScreen(gameState);
 
             drawGame();
@@ -208,6 +213,17 @@
             restart();
             gameState = "playing";
             showScreen(gameState);
+        });
+
+        // ===== Pause button =====
+        pauseButton.addEventListener("click", () => {
+            if (gameState === "playing") {
+                gameState = "paused";
+                pauseButton.textContent = "Resume";
+            } else if (gameState === "paused") {
+                gameState = "playing";
+                pauseButton.textContent = "Pause";
+            }
         });
 
     </script>
