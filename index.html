@@ -117,11 +117,6 @@
         // ===== MOVEMENT =====
         const moveSnake = () => {
             if (gameState !== "playing") {
-                let mess = document.getElementById("info");
-                mess.textContent = "Game over!"
-
-                let finScore = document.getElementById("finalScore");
-                finScore.textContent = `Final score: ${score}`;
                 return;
             }
 
@@ -136,6 +131,10 @@
                 snake.some(segment => segment.x === newHead.x && segment.y === newHead.y)
             ) {
                 gameState = "gameOver";
+                
+                document.getElementById("info").textContent = "Game over!"
+                document.getElementById("finalScore").textContent = `Final score: ${score}`;
+
                 showScreen("gameOver");
                 return;
             }
