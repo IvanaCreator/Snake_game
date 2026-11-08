@@ -69,6 +69,38 @@
         let food = { x: 15, y: 15 };
         let score = 0;
 
+        let snakeBodyColor;
+        let snakeHeadColor;
+        let flowerPetalColor;
+        let flowerCenterColor;
+
+        // ===== UPDATE COLORS =====
+        const updateColors = () => {
+
+            if (score < 5) {
+                snakeBodyColor = "#ea99e4";
+                snakeHeadColor = "#e667ca";
+                flowerPetalColor = "pink";
+                flowerCenterColor = "yellow";
+
+            } else if (score < 10) {
+                snakeBodyColor = "#b49ae8";
+                snakeHeadColor = "#8155c9";
+                flowerPetalColor = "#c99cff";
+                flowerCenterColor = "#ffe066";
+
+            } else {
+                snakeBodyColor = "#ffb366";
+                snakeHeadColor = "#e87532";
+                flowerPetalColor = "#ff914d";
+                flowerCenterColor = "#fff176";
+            }
+        };
+
+        // Set initial colors
+        updateColors();
+
+
         pauseButton.textContent = "Pause";
 
         // ===== High score =====
@@ -100,7 +132,7 @@
             const flowerX = food.x * gridSize + gridSize / 2;
             const flowerY = food.y * gridSize + gridSize / 2;
 
-            ctx.fillStyle = "pink";
+            ctx.fillStyle = flowerPetalColor;
 
             for (let i = 0; i < 5; i++) {
                 const angle = (i * Math.PI * 2) / 5;
@@ -113,7 +145,7 @@
                 ctx.fill();
             }
 
-            ctx.fillStyle = "yellow";
+            ctx.fillStyle = flowerCenterColor;
             ctx.beginPath();
             ctx.arc(flowerX, flowerY, 3, 0, Math.PI * 2);
             ctx.fill();
@@ -124,7 +156,7 @@
                 const segmentX = segment.x * gridSize + gridSize / 2;
                 const segmentY = segment.y * gridSize + gridSize / 2;
 
-                ctx.fillStyle = index % 2 === 0 ? "#e667ca" : "#ea99e4";
+                ctx.fillStyle = index % 2 === 0 ? snakeHeadColor : snakeBodyColor;
 
                 const radius = index === 0 ? 13 : 12;
 
@@ -177,7 +209,6 @@
 
                     updateHighScore();
                 }
-
                 
                 document.getElementById("info").textContent = "Game over!"
                 document.getElementById("finalScore").textContent = `Final score: ${score}`;
@@ -192,6 +223,7 @@
                 if (newHead.x === food.x && newHead.y === food.y) {
                     score += 1;
                     updateScore();
+                    updateColors();
                     placeFood();
                 } else {
                     snake.pop();
@@ -238,8 +270,11 @@
                 { x: 8, y: 10 }
             ];
             direction = { x: 1, y: 0 };
+            
             score = 0;
             updateScore();
+            updateColors();
+
             gameState = "playing";
             pauseButton.textContent = "Pause";
             showScreen(gameState);
