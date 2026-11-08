@@ -81,13 +81,27 @@
         const drawGame = () => {
             ctx.clearRect(0, 0,
                 canvas.width, canvas.height);
+            
+            const flowerX = food.x * gridSize + gridSize / 2;
+            const flowerY = food.y * gridSize + gridSize / 2;
 
-            ctx.fillStyle = "red";
-            ctx.fillRect(
-                food.x * gridSize,
-                food.y * gridSize,
-                gridSize, gridSize
-            );
+            ctx.fillStyle = "pink";
+
+            for (let i = 0; i < 5; i++) {
+                const angle = (i * Math.PI * 2) / 5;
+
+                const petalX = flowerX + Math.cos(angle) * 5;
+                const petalY = flowerY + Math.sin(angle) * 5;
+
+                ctx.beginPath();
+                ctx.arc(petalX, petalY, 4, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            ctx.fillStyle = "yellow";
+            ctx.beginPath();
+            ctx.arc(flowerX, flowerY, 3, 0, Math.PI * 2);
+            ctx.fill();
 
             ctx.fillStyle = "black";
             for (const segment of snake) {
