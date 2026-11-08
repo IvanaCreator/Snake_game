@@ -103,13 +103,19 @@
             ctx.arc(flowerX, flowerY, 3, 0, Math.PI * 2);
             ctx.fill();
 
-            ctx.fillStyle = "black";
-            for (const segment of snake) {
-                ctx.fillRect(
-                    segment.x * gridSize,
-                    segment.y * gridSize,
-                    gridSize, gridSize
-                );
+            for (let index = 0; index < snake.length; index++) {
+                const segment = snake[index];
+
+                const segmentX = segment.x * gridSize + gridSize / 2;
+                const segmentY = segment.y * gridSize + gridSize / 2;
+
+                ctx.fillStyle = index % 2 === 0 ? "#e667ca" : "#ea99e4";
+
+                const radius = index === 0 ? 13 : 12;
+
+                ctx.beginPath();
+                ctx.arc(segmentX, segmentY, radius, 0, Math.PI * 2);
+                ctx.fill();
             }
         };
 
