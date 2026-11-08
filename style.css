@@ -42,3 +42,16 @@ h1 {
     border-radius: 4px;
     margin-bottom: 20px;
 }
+
+#score,
+#finalScore {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #21311b;
+}
+
+#info {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #590f0f;
+}
