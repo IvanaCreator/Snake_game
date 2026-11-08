@@ -55,3 +55,22 @@ h1 {
     font-weight: bold;
     color: #590f0f;
 }
+
+button {
+    padding: 12px 30px;
+    margin: 10px;
+    background: #e8c8e8;
+    color: #071407;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #eaaeea;
+    box-shadow: 0 0 15px #e8c8e8;
+    transform: scale(1.05);
+}
