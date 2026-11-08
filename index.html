@@ -23,11 +23,13 @@
         <canvas id="gameCanvas" width="400" height="400"></canvas>
         <button id="pauseButton">Pause</button>
         <p id="score"></p>
+        <p id="highScore"></p>
     </div>
 
     <div id="gameOverScreen" hidden>
         <p id="info"></p>
         <p id="finalScore"></p>
+        <p id="highScoreFinal"></p>
         <button id="restartButton">Restart</button>
     </div>
 
@@ -68,6 +70,19 @@
         let score = 0;
 
         pauseButton.textContent = "Pause";
+
+        // ===== High score =====
+        let highScore = Number(localStorage.getItem("snakeHighScore")) || 0;
+
+        const highScoreElement = document.getElementById("highScore");
+        const highScoreFinalElement = document.getElementById("highScoreFinal");
+
+        const updateHighScore = () => {
+            highScoreElement.textContent = `High Score: ${highScore}`;
+            highScoreFinalElement.textContent = `High Score: ${highScore}`;
+        };
+
+        updateHighScore();
 
         // ===== Score =====
         const updateScore = () => {
@@ -155,6 +170,14 @@
                 snake.some(segment => segment.x === newHead.x && segment.y === newHead.y)
             ) {
                 gameState = "gameOver";
+
+                if (score > highScore) {
+                    highScore = score;
+                    localStorage.setItem("snakeHighScore", String(highScore));
+
+                    updateHighScore();
+                }
+
                 
                 document.getElementById("info").textContent = "Game over!"
                 document.getElementById("finalScore").textContent = `Final score: ${score}`;
@@ -216,6 +239,7 @@
             ];
             direction = { x: 1, y: 0 };
             score = 0;
+            updateScore();
             gameState = "playing";
             pauseButton.textContent = "Pause";
             showScreen(gameState);
